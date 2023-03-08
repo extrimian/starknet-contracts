@@ -1,0 +1,100 @@
+[
+    {
+        "data": [
+            {
+                "name": "implementation",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Upgraded",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "previousAdmin",
+                "type": "felt"
+            },
+            {
+                "name": "newAdmin",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "AdminChanged",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "anchor_file_hash_low",
+                "type": "felt"
+            },
+            {
+                "name": "anchor_file_hash_high",
+                "type": "felt"
+            },
+            {
+                "name": "transaction_number",
+                "type": "felt"
+            },
+            {
+                "name": "number_of_operation",
+                "type": "felt"
+            },
+            {
+                "name": "writer",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "anchor",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "name": "proxy_admin",
+                "type": "felt"
+            }
+        ],
+        "name": "initializer",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "new_implementation",
+                "type": "felt"
+            }
+        ],
+        "name": "upgrade",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "anchor_hash_low",
+                "type": "felt"
+            },
+            {
+                "name": "anchor_hash_high",
+                "type": "felt"
+            },
+            {
+                "name": "number_of_operation",
+                "type": "felt"
+            },
+            {
+                "name": "transaction_number",
+                "type": "felt"
+            }
+        ],
+        "name": "anchor_hash",
+        "outputs": [],
+        "type": "function"
+    }
+]
