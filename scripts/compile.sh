@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 cd cairo-proxy
 nile compile
 cd ..

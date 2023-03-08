@@ -1,0 +1,4 @@
+Sending the transaction with max_fee: 0.000059 ETH (59160366205926 WEI).
+Declare transaction was sent.
+Contract class hash: 0x780420e10f0de9ab10600d6a3a0023f996522bba30d98808c07f7e432f6a05d
+Transaction hash: 0x228b147dfd6becf3e14ce423cf68c9d8b26be227f648c9c382b1ca9d7d4a84a
