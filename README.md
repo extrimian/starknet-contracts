@@ -102,7 +102,7 @@ to do so you must invoke the `deployContract`
 
 an example of deployment given the sidetree_v0.cairo would be:
 ```sh
-starknet invoke     --address 0x041a78e741e5af2fec34b695679bc6891742439f7afb8484ecd7766661ad02bf     --abi ../../UDC.json     --function deployContract     --inputs 0x780420e10f0de9ab10600d6a3a0023f996522bba30d98808c07f7e432f6a05d 8888 0 4 0x76a33aacc197c42ff86616f63ab77ed90213f989001fe98e0a5662430158051 1295919550572838631247819983596733806859788957403169325509326258146877103642 1 0x33a8ea1e0c0e638627b6627353f5edcebaadd922accf9f1031fd3e2fe2a412d
+starknet invoke     --address 0x041a78e741e5af2fec34b695679bc6891742439f7afb8484ecd7766661ad02bf     --abi abi/UDC.json     --function deployContract     --inputs 0x780420e10f0de9ab10600d6a3a0023f996522bba30d98808c07f7e432f6a05d 8888 0 4 0x76a33aacc197c42ff86616f63ab77ed90213f989001fe98e0a5662430158051 1295919550572838631247819983596733806859788957403169325509326258146877103642 1 0x33a8ea1e0c0e638627b6627353f5edcebaadd922accf9f1031fd3e2fe2a412d
 
 ```
 
@@ -118,4 +118,16 @@ Where the proxy calldata is:
 PROX_CONTRACT_CALLDATA = SIDETREE_CONTRACT_HASH SIDETREE_CONTRACT_SELECTOR SIDETREE_V0_CALLDATA CONTRACT_OWNER_ADDRES
 ```
 
-To get the `SIDETREE_CONTRACT_SELECTOR` which is the selector number for the initializing function of the actual contract. Example:
+To get the `SIDETREE_CONTRACT_SELECTOR` which is the selector number for the initializing function of the actual contract you must run the get_selector.py script under the `scripts` folder
+
+```sh
+python get_selector.py initializer
+```
+
+### Address of the contract
+
+You will find out that the CLI gives you a `Contract address` as a result, upon further inspection you will find out that it is the same as the UDC, this is because we are calling an `invoke` function and the script is not prepared to read the information emmited.
+
+Luckly we get the transaction hash of it, and we can go to the corresponding block exporer, testnet or mainnet to get our contract address. Example: https://starkscan.co/tx/0x07c7e1dd9f570679bc0fc9ffdb0dba218ca37c479379f4a4d430d0bafdd7831b
+
+On the `deployed contracts` field you will get the address of you new contract

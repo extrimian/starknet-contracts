@@ -1,5 +1,5 @@
 #!/bin/bash
-cd cairo-proxy
+cd ../cairo-proxy
 nile compile
 cd ..
 find ./cairo-proxy/artifacts/ -maxdepth 1 -type f -print0 | xargs -0 mv -t compiled
