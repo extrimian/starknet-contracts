@@ -1,10 +1,10 @@
 # Starknet Contract
 
-In this repository you will find all the necesarry information to deploy a SidetreeAnchoring contract implementing a proxy pattern to allow for upgradeability on the contract logic as well as future proofing for the upcoming Cairo Versions
+In this repository you will find all the necesarry information to deploy a Sidetree anchoring contract implementing a proxy pattern to allow for upgradability on the contract logic, as well as future proofing for the upcoming Cairo Versions.
 
 # Contracts
 
-All contracts that rely on a proxy to be exposed must have an upgrade function to change the implementation
+All contracts that rely on a proxy to be exposed must have an upgrade function to change the implementation.
 
 ```cairo
 from openzeppelin.upgrades.library import Proxy
@@ -18,14 +18,13 @@ func upgrade{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     return ();
 }
 ```
-`Proxy` is an OpenZeppelin library that contains the bulk of the logic to implement the proxy pattern
+> `Proxy` is an OpenZeppelin library that contains the bulk of the logic to implement the proxy pattern
 
 ## sidetree_v0.cairo
 
 A simple sidetree anchoring contract without keeping any state on the blockchain ensuring lower transactions costs
 
 ## sidetree_v1.cairo
-
 
 A simple sidetree anchoring contract using a variable to keep state on the blockchain
 
@@ -37,7 +36,7 @@ This is the proxy contract that will be the entry point for all the future contr
 
 - Python 3.9 is required 
 
-
+> You can download Python 3.9.16 from https://www.python.org/downloads/release/python-3916/    
 ## Environment
 
 https://www.cairo-lang.org/docs/quickstart.html#quickstart
@@ -57,8 +56,7 @@ to
 ```sh
 export STARKNET_NETWORK=alpha-mainnet
 ```
-
-
+> Don't forget to add funds to the account using the faucet https://faucet.goerli.starknet.io/
 ### Considerations
 
 After the enviroment is set the account info will be saved under $HOME/.starknet_accounts/starknet_open_zeppelin_accounts.json
@@ -67,38 +65,42 @@ to create a new one, generate a backup of the file and create a new account
 
 ## Extras
 
-Inside your virtual enviroment run:
+To install Cairo utilities, inside your virtual enviroment run:
 
 ```sh
 pip install cairo-nile
 pip install openzeppelin-cairo-contracts
 pip install starknet.py
 ```
-
-
 # Get the contracts up
 
-After having your enviroment ready
+After having your enviroment ready be sure to [compile](#compilation), [declare](#declaring) and [deploy](#deploying) the contracts. Don't forget to navigate to the `scripts` folder of this repo before running the scripts, always remaining inside the virtual environment.
 
 ## Compilation
 
-Run the compile.sh script, which will compile all contracts under `cairo-proxy/contracts` and move the results into the `abi` and `compiled` folders
+Run the compile.sh script, which will compile all contracts under `cairo-proxy/contracts` and move the results into the `abi` and `compiled` folders.
+```sh
+./compile.sh
+```
+> Their descriptions can be found in the [contracts](#contracts) section
 
 ## Declaring
 
 Running the `declare.sh` script will declare the proxy contract and the v0 one
-
+```sh
+./declare.sh
+```
 or you can manually do it running: 
 ```
 starknet declare --contract compiled/YOUR_DESIRED_CONTRACT.json
 ```
+> Note that the contract may not have been initialized yet, so you will get an error with code `StarknetErrorCode.UNINITIALIZED_CONTRACT`. This is normal, simply wait a bit and try again.
 
 ## Deploying
 
 The deployment of an starknet contract is made via de UDC https://medium.com/starknet-edu/deploying-to-starknet-with-the-universal-deployer-contract-c6de07092bfb
 
 to do so you must invoke the `deployContract` 
-
 
 an example of deployment given the sidetree_v0.cairo would be:
 ```sh
@@ -109,7 +111,7 @@ starknet invoke     --address 0x041a78e741e5af2fec34b695679bc6891742439f7afb8484
 The variables are as follows:
 
 ```sh
-starknet invoke     --address 0x041a78e741e5af2fec34b695679bc6891742439f7afb8484ecd7766661ad02bf     --abi ../../UDC.json     --function deployContract     --inputs PROXY_CONTRACT_HASH SALTING UNIQUE PROXY_CONTRACY_HASH_CALLDATA_LEN PROXY_CONTRACT_CALLDATA 
+starknet invoke     --address 0x041a78e741e5af2fec34b695679bc6891742439f7afb8484ecd7766661ad02bf     --abi ../../UDC.json     --function deployContract     --inputs PROXY_CONTRACT_HASH SALTING UNIQUE PROXY_CONTRACT_HASH_CALLDATA_LEN PROXY_CONTRACT_CALLDATA 
 ```
 
 Where the proxy calldata is:
